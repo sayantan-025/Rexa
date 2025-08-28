@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { ClerkProvider } from "@clerk/nextjs";
-import Navbar from "@/components/global/navbar";
-import { dark } from "@clerk/themes";
+
+import { Header } from "@/components/global/header";
+import { Providers } from "@/components/providers/providers";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -15,29 +15,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-      }}
-    >
-      <html lang="en" suppressHydrationWarning>
-        <body className={`${inter.className}`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {/* navbar  */}
-            <Navbar />
-            <main className="min-h-screen">{children}</main>
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
+        <Providers>
+          {/* navbar */}
+          <Header />
+          <main className="min-h-screen">{children}</main>
+        </Providers>
+      </body>
+    </html>
   );
 }

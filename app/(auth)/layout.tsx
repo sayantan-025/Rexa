@@ -4,7 +4,7 @@ type Props = { children: React.ReactNode };
 
 const AuthLayout = ({ children }: Props) => {
   return (
-    <div className="flex justify-center items-center h-screen w-full">
+    <div className="flex justify-center items-center h-screen w-full z-50">
       {children}
     </div>
   );
